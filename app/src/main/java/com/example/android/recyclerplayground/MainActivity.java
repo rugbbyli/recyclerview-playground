@@ -20,6 +20,7 @@ import com.example.android.recyclerplayground.fragments.VerticalStaggeredGridFra
 public class MainActivity extends ActionBarActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    public static MainActivity current;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -43,6 +44,8 @@ public class MainActivity extends ActionBarActivity implements
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        current = this;
     }
 
     @Override

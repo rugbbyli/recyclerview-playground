@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.VerticalItemHolder> {
+public class SimpleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private ArrayList<GameItem> mItems;
+    protected ArrayList<GameItem> mItems;
 
     private AdapterView.OnItemClickListener mOnItemClickListener;
 
@@ -61,7 +61,7 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.VerticalIt
     }
 
     @Override
-    public VerticalItemHolder onCreateViewHolder(ViewGroup container, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup container, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         View root = inflater.inflate(R.layout.view_match_item, container, false);
 
@@ -69,8 +69,13 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.VerticalIt
     }
 
     @Override
-    public void onBindViewHolder(VerticalItemHolder itemHolder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         GameItem item = mItems.get(position);
+
+        if(!(holder instanceof VerticalItemHolder)){
+            return;
+        }
+        VerticalItemHolder itemHolder = (VerticalItemHolder)holder;
 
         itemHolder.setAwayScore(String.valueOf(item.awayScore));
         itemHolder.setHomeScore(String.valueOf(item.homeScore));
@@ -88,7 +93,7 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.VerticalIt
         mOnItemClickListener = onItemClickListener;
     }
 
-    private void onItemHolderClick(VerticalItemHolder itemHolder) {
+    protected void onItemHolderClick(RecyclerView.ViewHolder itemHolder) {
         if (mOnItemClickListener != null) {
             mOnItemClickListener.onItemClick(null, itemHolder.itemView,
                     itemHolder.getAdapterPosition(), itemHolder.getItemId());

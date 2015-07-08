@@ -21,7 +21,7 @@ public class VerticalStaggeredGridFragment extends RecyclerFragment {
 
     @Override
     protected RecyclerView.LayoutManager getLayoutManager() {
-        return new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        return new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
     }
 
     @Override
